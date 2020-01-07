@@ -1,0 +1,75 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/gallery.css">
+{% endblock %}
+
+{% block title %}
+HLT Gallery!
+{% endblock %}
+
+{% block main_content %}
+<div class="container" id="GalIntro">
+    <div class="row">
+        <h1>Gallery</h1>
+        <p>Traverse all of the our photographs, all of which are designed to capture the tranquil atmosphere and phenomenal service that we offer at Hotel La Tour.
+        <br>Use the slideshow below to view our hotel in high definition:</p>
+    </div>
+</div>
+
+    <div id="GalleryBackground">
+<div class="container" id="GalleryCont">
+  <div class="SlideImgCont">
+      <p>Park View Day</p>
+      <img src="../../static/imgs/ParkSideDay.jpg">
+  </div>
+  <div class="SlideImgCont">
+      <p>Bar</p>
+      <img src="../../static/imgs/FabricCeiling.jpg">
+  </div>
+  <div class="SlideImgCont">
+      <p>Park View Night</p>
+      <img src="../../static/imgs/ParkViewNight.jpg">
+  </div>
+  <div class="SlideImgCont">
+      <p>Restaurant 1</p>
+      <img src="../../static/imgs/GlassFinish.jpg">
+  </div>
+    <div class="SlideImgCont">
+        <p>Restaurant 2</p>
+      <img src="../../static/imgs/CeilingBooths.jpg">
+  </div>
+    <div class="SlideImgCont">
+        <p>Chill Lounge</p>
+      <img src="../../static/imgs/CeilingRailings.jpg">
+  </div>
+
+  <a id="PrevImageButton">&#10094;</a>
+  <a id="NextImageButton">&#10095;</a>
+
+  <div class="row" id="ImageIcons">
+    <div class="col-lg-2 col-sm-4">
+      <img src="../../static/imgs/ParkSideDay.jpg" class="CurImageIcon" onclick="ConfigSlides(0)" alt="ParkSideDay">
+    </div>
+    <div class="col-lg-2 col-sm-4">
+      <img class="CurImageIcon" src="../../static/imgs/FabricCeiling.jpg" onclick="ConfigSlides(1)" alt="FabricCeiling">
+    </div>
+    <div class="col-lg-2 col-sm-4">
+      <img class="CurImageIcon" src="../../static/imgs/ParkViewNight.jpg" onclick="ConfigSlides(2)" alt="FabricCeiling">
+    </div>
+    <div class="col-lg-2 col-sm-4">
+      <img class="CurImageIcon" src="../../static/imgs/GlassFinish.jpg" onclick="ConfigSlides(3)" alt="GlassFinish">
+    </div>
+      <div class="col-lg-2 col-sm-4">
+      <img class="CurImageIcon" src="../../static/imgs/CeilingBooths.jpg" onclick="ConfigSlides(4)" alt="CeilingBooths">
+    </div>
+      <div class="col-lg-2 col-sm-4">
+      <img class="CurImageIcon" src="../../static/imgs/CeilingRailings.jpg" onclick="ConfigSlides(5)" alt="CeilingRailings">
+    </div>
+  </div>
+</div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="../../static/js/gallery.js"></script>
+{% endblock %}

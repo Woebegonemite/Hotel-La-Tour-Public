@@ -1,0 +1,32 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<style>
+h1{
+    text-align: center;
+    font-size: 2.5em;
+    margin-top:1em;
+    color:red;
+}
+
+p{
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+}
+</style>
+{% endblock %}
+
+
+{% block title %}
+Internal Error
+{% endblock %}
+
+{% block main_content %}
+    <h1><a href="/">Internal Error</a></h1>
+    <p>Sorry it appears that one of our systems is malfunctioning.<br>
+        We apologise for any inconvenience; our IT team are working on a fix as we speak.<br>
+        Thank you for your cooperation.<br><br>
+        If this is a result of a transaction you have made then we assure you that you have not been charged<br>
+        Please use the link below if you need to contact us.<br>
+    <a href="/misc/contact_us">Contact Us</a></p>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+    <meta charset="UTF-8">
+    <meta name="googlebot" content="noindex">
+    <meta name="googlebot-news" content="nosnippet">
+    <meta name="robots" content="noindex">
+    <title>Success</title>
+    <style>
+        h1{
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-top: 1em;
+        }
+        p{
+            text-align: center;
+            font-size: 1.5em;
+        }
+        #receipt{
+            font-style: italic;
+            color: #3a5f6e;
+        }
+        a{
+            margin-top: 1em;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}
+Success!
+{% endblock %}
+
+{% block main_content %}
+<body>
+<h1>Your transaction was successful!</h1>
+<p>Thank you for shopping at Hotel La Tour <br>
+    Your receipt is: <span id="receipt">{{ reciept }}</span><br>
+    <strong>This is important, you will not be able to refund this transaction if you do not have the receipt<br></strong>
+<p><a href="/">Return</a></p>
+{% endblock %}

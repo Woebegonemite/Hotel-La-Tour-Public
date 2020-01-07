@@ -1,0 +1,29 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<style>
+h1{
+    text-align: center;
+    font-size: 2.5em;
+    margin-top:1em;
+}
+
+p{
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1.5em;
+}
+</style>
+{% endblock %}
+
+
+{% block title %}
+404 Not Found
+{% endblock %}
+
+{% block main_content %}
+    <h1><a href="/">404</a></h1>
+    <p>Sorry but it appears that this page does not exist<br>
+        Please contact us using the link below if this is erroneous<br>
+        Thank you for your cooperation.<br>
+    <a href="/misc/contact_us">Contact Us</a></p>
+{% endblock %}

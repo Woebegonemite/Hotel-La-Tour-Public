@@ -1,0 +1,115 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/room_booking.css">
+{% endblock %}
+
+
+{% block title %}
+Room booking
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+        <div class="row" id="title">
+            <h1>Book a room</h1>
+        </div>
+        <button id="basketButton"><img alt="basketButton" src="../../static/imgs/noun_basket_392260.png"></button>
+        <div class="row table-responsive" id="basketContainer">
+            <table class="table" id="basketTable">
+                <thead>
+                    <tr><td colspan="5"> Current Basket </td></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Number</td>
+                        <td>Room name</td>
+                        <td>Arrival Date</td>
+                        <td>Departure Date</td>
+                        <td>Cost</td>
+                    </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td id="totalCost">0</td>
+                        </tr>
+                </tbody>
+            </table>
+            <form method="post">
+                <input type="submit" value="Delete Basket" name="DeleteBasket" class="btn-danger" id="delete_all">
+                <input type="submit" value="Check Out" name="CheckOut" class="btn-success" id="check_out">
+            </form>
+        </div>
+        <form method="post" id="searchBox">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 form-group" id="FormArrivalDate">
+                    <label for="Arrival">Arrival: </label>
+                    <input type="date" name="Arrival" required value="{{ search_data["start_date"] }}">
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 form-group" id="FormDepartDate">
+                    <label for="Depart">Depart: </label>
+                    <input type="date" name="Depart" required value="{{ search_data["end_date"] }}">
+                </div>
+                <div id="FormRoomType" class="col-lg-3 col-md-6 col-sm-12 form-group">
+                    <label for="RoomType">Room: </label>
+                    <select name="RoomType">
+                        <option value="Any" {% if search_data["type"] == "Any" %}selected{% endif %}>Any</option>
+                        <option value="1" {% if search_data["type"] == "1" %}selected{% endif %}>Standard Room</option>
+                        <option value="2" {% if search_data["type"] == "2" %}selected{% endif %}>Executive Room</option>
+                        <option value="3" {% if search_data["type"] == "3" %}selected{% endif %}>Suite One</option>
+                        <option value="4" {% if search_data["type"] == "4" %}selected{% endif %}>Suite Two</option>
+                    </select>
+                </div>
+                <div id="FormRoomPrices" class="col-lg-3 col-md-6 col-sm-12 form-group">
+                    <label for="Price">Price: </label>
+                    <select name="Price" id="Price">
+                        <option value="1-4000" {% if search_data["cost"] == "Any" %}selected{% endif %}>Any</option>
+                        <option value="1-99" {% if search_data["cost"] == "1-99" %}selected{% endif %}>&#163 1-&#163 99</option>
+                        <option value="100-149" {% if search_data["cost"] == "100-149" %}selected{% endif %}>&#163 100-&#163 149</option>
+                        <option value="150-199" {% if search_data["cost"] == "150-199" %}selected{% endif %}>&#163 150-&#163 199</option>
+                        <option value="200-299" {% if search_data["cost"] == "200-299" %}selected{% endif %}>&#163 200-&#163 299</option>
+                        <option value="300-399" {% if search_data["cost"] == "300-399" %}selected{% endif %}>&#163 300-&#163 399</option>
+                        <option value="400-499" {% if search_data["cost"] == "400-499" %}selected{% endif %}>&#163 400-&#163 499</option>
+                        <option value="500-750" {% if search_data["cost"] == "500-750" %}selected{% endif %}>&#163 500-&#163 750</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="row" id="roomTitle">
+            <h2>Returned Rooms</h2>
+        </div>
+        <div id="returnedRooms">
+            {% if final_room_data %}
+                {% for room in final_room_data %}
+                    {% if room %}
+                        <form id="add_form_data" method="post">
+                            <div class="row returnedRoom">
+                                <div class="col-lg-6 col-md-6 roomNameAndDesc">
+                                    <h4>{{ room.room_name }}</h4>
+                                    <p>{{ room.description }}</p>
+                                </div>
+                                <div class="col-lg-3 col-md-4 roomDetails">
+                                    <p>Start date:<br>{{ room.start_date }}</p>
+                                    <p>End date:<br>{{ room.end_date }}</p>
+                                    <p>Total cost:<br>£{{ room.total_cost }}</p>
+                                </div>
+                                <div class="col-lg-3 col-md-2">
+                                    <img src="../../static/imgs/Bar.jpg" alt="room image" class="roomImg">
+                                    <input class="btn-success addRoom" type="submit" value="Add room">
+                                </div>
+                                <input type="hidden" name="room_add" value="{{ room.id }}">
+                                <input type="hidden" name="room_add_cost" value="{{ room.total_cost }}">
+                                <input type="hidden" name="Arrival" value="{{ search_data["start_date"]  }}">
+                                <input type="hidden" name="Depart"  value="{{ search_data["end_date"] }}">
+                            </div>
+                        </form>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        <div id="noRooms" {% if final_room_data %}style="display: none" {% endif %}><p>No rooms match your search request, please change your search fields to find some results</p></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+    <script src="../../static/js/deduce_dates.js"></script>
+    <script src="../../static/js/room_booking.js"></script>
+{% endblock %}

@@ -1,0 +1,133 @@
+Standard Room:
+"Regardless of who you are, the Standard Room will always be a go to pick for comfort and affordability,<br><br>
+Each room is equipped with a 38″ LED flat screen TV, a modern bathroom with a dual control monsoon shower, laptop safe, 
+iron & ironing board, tea & coffee making facilities as well as air conditioning and complimentary WiFi.
+:
+Air-conditioning, 24 hour Room Service, Large desk area with work lamp, Air-conditioning, Audio speakers, Flat screen TV, Dual control monsoon shower with toiletries, Iron & Ironing Boards, King or Twin bed available
+:
+Basic
+:
+23.5 square metres"
+
+Executive Room:
+"The most classy room of all the options offered by the hotel. Relax in the King size bed or stylish chaise lounge and enjoy a refreshing
+shower in the dual control monsoon shower. All rooms feature a 42″ LED flat screen TV,
+a laptop safe, tea & coffee making facilities, iron & ironing board as well as air conditioning
+and 24 hour room service.
+:
+Dual control monsoon shower with toiletries,
+Tea/Coffee making facilities,
+Complimentary bottle of water,
+24 hour Room Service,
+42” LED flat screen TV with live record,
+Large desk area with work lamp,
+Dual control monsoon shower with toiletries,
+King size bed with luxury topper,
+Iron & Ironing Boards
+:
+Good
+:
+25.5 square metres"
+
+Executive Room:
+"The most classy room of all the options offered by the hotel. Relax in the King size bed or stylish chaise lounge and enjoy a refreshing 
+shower in the dual control monsoon shower. All rooms feature a 42″ LED flat screen TV, 
+a laptop safe, tea & coffee making facilities, iron & ironing board as well as air conditioning 
+and 24 hour room service.
+:
+Dual control monsoon shower with toiletries,
+Tea/Coffee making facilities,
+Complimentary bottle of water,
+24 hour Room Service,
+42” LED flat screen TV with live record,
+Large desk area with work lamp,
+Dual control monsoon shower with toiletries,
+King size bed with luxury topper,
+Iron & Ironing Boards
+:
+Good
+:
+25.5 square metres"
+
+Suite One:
+Each of the Suite One rooms provide ample space to relax and unwind. If you are travelling on 
+business there is plenty of space to work with a large desk area; or if you are enjoying a night 
+in Birmingham city, you can get ready in comfort enjoying a complimentary bottle of wine & chocolates.
+These rooms are designed with relaxation in mind, featuring a King size bed, comfortable 
+armchair, a large shower and extra-deep bath with a built in TV above. 
+Features also include 42″ LED flat screen TV and Nespresso coffee machine.
+:
+Laptop safe,
+Nespresso Coffee Machine,
+Complimentary bottle of wine and chocolates,
+Bathroom with TV,
+Extra-deep bath,
+Anti-steam mirror,
+Large walk-in shower,
+Bathrobe and Slippers,
+Luxury toiletries
+:
+Premium
+:
+33 square metres
+
+Suite Two:
+Suite two rooms at Hotel La Tour offer the best in luxury. Relax in the separate lounge area with large sofa and 42” LED Flat screen TV or unwind in the 
+extra-deep bath with in-built TV. Each suite is also equipped with large walk-in monsoon shower, audio speakers and Nespresso coffee machine.
+Our Suites are extra spacious with their own separate lounge area, king size bed and complimentary bottle of wine and chocolates.
+:
+King size bed with luxury topper,
+Separate lounge area with large sofa,
+Climate control,
+Air-conditioning,
+Audio speakers,
+King or Twin bed available,
+Dual control monsoon shower with toiletries,
+Separate lounge area with large sofaat screen TV with live record
+:
+First-Rate
+:
+42 square metres
+
+
+
+
+
+
+Customer_Connection = sa.Table(
+    "Customer_Connection",
+    SqlAlchemyBase.metadata,
+    sa.Column("customer_primary_id", sa.Integer, sa.ForeignKey("Customer.id")),
+    sa.Column("customer_secondary_id",sa.Integer, sa.ForeignKey("Customer.id"))
+)
+
+# Contains all data related to a user of the website
+class Customer(SqlAlchemyBase):
+    __tablename__ = 'Customer'
+    id = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
+    first_name = sa.Column(sa.String, nullable=False)
+    last_name = sa.Column(sa.String, nullable=False)
+    title = sa.Column(sa.String)
+    email = sa.Column(sa.String, nullable=False, index=True)
+    password = sa.Column(sa.String, nullable=False, index=True)
+    dob = sa.Column(sa.Date)
+    tel_number = sa.Column(sa.String)
+    country = sa.Column(sa.String)
+    postal_cost = sa.Column(sa.String)
+    address = sa.Column(sa.String)
+    blacklist = sa.Column(sa.Boolean, default=False)
+    creation_date = sa.Column(sa.DateTime, default=datetime.now)
+    bookings = orm.relation("Transaction", backref="customer")
+    friends = orm.relation("Customer", secondary="Customer_Connection",
+                           primaryjoin=(id == "Customer_Connection.c.customer_primary_id"),
+                           secondaryjoin=id == "Customer_Connection.c.customer_secondary_id",
+                           backref=orm.backref("friends"))
+
+
+
+
+
+
+
+
+

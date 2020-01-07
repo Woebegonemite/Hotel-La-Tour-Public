@@ -1,0 +1,5 @@
+#Requirements.txt
+flask
+sqlalchemy
+passlib
+jsonify

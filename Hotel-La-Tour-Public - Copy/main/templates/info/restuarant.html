@@ -1,0 +1,41 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/restaurant.css">
+{% endblock %}
+
+{% block title %}
+Restaurant!
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Restaurant</h1>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <h2> Restaurant Overview</h2>
+            <p> The restaurant has always been a stable for Hotel La Tour- our highly trained staff always deliver the best dishes regardless of any situation. There are two
+            methods of securing a table at Hotel La Tour: turning up on the day or booking a room online <sub> granted that number of people is less than 8 </sub>.
+            Our Restaurant is named after the famous <dfn title="Creator of the Turing Machine"> 'Alan Turing' </dfn> who's contributions to computing and society are the very
+            essence of our aims as a company </p>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <img src="../../static/imgs/Lighting.jpeg">
+        </div>
+    </div>
+    <div class="row">
+        <a href="/transaction/table_booking" class="btn-info">Book a table</a>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <img src="../../static/imgs/Bar.jpg">
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <h2> Menu Details </h2>
+            <p> Our Menu is both attractive and adaptive- with new additions being added every day to the variable menu. "Turing's" makes sure to keep you coming back for more as
+            our menu is constantly being modified to suit the user, while also keeping your personal favorites so you never feel unsatisfied. Even better, if you choose to book
+            a room online through our website, we will give you 10% off at the restaurant. You can not pass on a deal like that! </p>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

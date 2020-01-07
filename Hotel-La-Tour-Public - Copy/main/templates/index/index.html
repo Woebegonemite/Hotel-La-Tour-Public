@@ -1,0 +1,116 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/index.css">
+{% endblock %}
+
+{% block title %}
+Hotel-La-Tour!
+{% endblock %}
+
+{% block main_content %}
+    <div class="PresentationContent">
+        <div id="SlideImageBack"></div>
+        <div id="SlideImage"></div>
+        <div id="LogoImages">
+            <img id="MainLogo" alt="main logo" src="../../static/imgs/LogoShortBlack.png">
+            <img id="MainLogoBehind" alt="main logo" src="../../static/imgs/LogoShortWhite.png">
+        </div>
+    </div>
+
+    <div id="Break"></div>
+<div class="container">
+    <form class="form-inline" id="MainForm" method="post" action="/transaction/room_booking">
+        <div class="form-group" id="FormBooking">
+            <label for="BookingType">Book: </label>
+            <select name="BookingType">
+                <option selected value="RoomBooking">Room</option>
+                <option value="TableBooking">Table</option>
+            </select>
+        </div>
+        <div class="form-group" id="FormArrivalDate">
+            <label for="Arrival">Arrival: </label>
+            <input type="date" name="Arrival" required>
+        </div>
+        <div class="form-group" id="FormDepartDate">
+            <label for="Depart">Depart: </label>
+            <input type="date" name="Depart" required>
+        </div>
+        <div id="FormRoomType" class="form-group">
+            <label for="RoomType">Room: </label>
+            <select name="RoomType">
+                <option value="Any" selected>Any</option>
+                <option value="1">Standard Room</option>
+                <option value="2">Executive Room</option>
+                <option value="3">Suite One</option>
+                <option value="4">Suite Two</option>
+            </select>
+        </div>
+        <div id="FormRoomPrices" class="form-group">
+            <label for="Price">Price: </label>
+            <select name="Price" id="Price">
+                <option value="1-999" selected>Any</option>
+                <option value="1-99">&#163 1-&#163 99</option>
+                <option value="100-149">&#163 100-&#163 149</option>
+                <option value="150-199">&#163 150-&#163 199</option>
+                <option value="200-299">&#163 200-&#163 249</option>
+                <option value="300-399">&#163 300-&#163 399</option>
+                <option value="400-499">&#163 400-&#163 499</option>
+                <option value="500-750">&#163 500-&#163 750</option>
+            </select>
+        </div>
+        <div id="FormTableType" class="form-group">
+            <label for="TableType">Table: </label>
+            <select name="TableType" id="TableType" form="IndexForm" disabled>
+                <option value="Any" selected>Any</option>
+                <option value="2">Table #2</option>
+                <option value="4">Table #4</option>
+                <option value="6">Table #6</option>
+                <option value="8">Table #8</option>
+            </select>
+        </div>
+        <div id="SubmitBookingCont" class="form-group">
+            <label for="SubmitBooking">Submit: </label>
+            <input type="submit" name="SubmitBooking" id="SubmitBooking" value="BookNow" class="btn-success">
+        </div>
+    </form>
+</div>
+    <div id="IntroInfo">
+            <h2>Four Star Luxury!</h2>
+                <p>Hotel La Tour is a high quality hotel situated in the heart of Milton Keynes. Your comfort
+                is what drives us and we have trained staff at the ready to assist you with what you require.
+                View our rooms and tables to see what we have to offer or book a room or table through our website
+                by clicking on the book now button above!
+                <br><br>
+                We hope you enjoy your stay!
+                </p>
+    </div>
+
+
+    <div class="container">
+    <div class="row" id="ImgDescRow">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2>Delicious dining</h2>
+            <img src="../../static/imgs/CeilingBooths.jpg" alt="Ceiling image" class="InfoImages">
+            <p> Book a table at our county famous restaurant- <strong>'Turings'</strong>,
+            where we serve everything from seasoned lobsters to chocolate cake</p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2>Sensational suites</h2>
+            <img src="../../static/imgs/CeilingBoothsSeating.jpg" alt="Ceiling image" class="InfoImages">
+            <p>Booking a room has never been easier with the <cite title="Book via the website and get discounts!">
+                Hotel La Tour room booking service </cite> all of our rooms are at the tips of your fingers </p>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <h2>Marvellous metropolis</h2>
+            <img src="../../static/imgs/CeilingRailings.jpg" alt="Ceiling image" class="InfoImages">
+            <p> Come and visit the city of Milton Keynes! Rated 97th best place to live in the UK</p>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block additional_js %}
+    <script src="../../static/js/deduce_dates.js"></script>
+    <script src="../../static/js/index.js"></script>
+{% endblock %}

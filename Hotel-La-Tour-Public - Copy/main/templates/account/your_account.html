@@ -1,0 +1,115 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/your_account.css">
+{% endblock %}
+
+{% block title %}
+{{user_name.capitalize()  }} account
+{% endblock %}
+
+{% block main_content %}
+    <div class="container">
+    <h1>{{user_name.capitalize()}}'s home page</h1>
+        <div class="row sec_nav">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <a class="btn-success" href="add_connection">Add Friend</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <a class="btn-info" href="#connection_activity">Friend Activity</a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <a class="btn-danger" href="change_password">Change password</a>
+            </div>
+        </div>
+        <div class="row" id="info">
+            <div class="col-lg-6">
+                <p>Name = {{ user_name.capitalize() }} {{ customer.last_name.capitalize() }}</p>
+            </div>
+            <div class="col-lg-6">
+                <p>ID = {{ customer.id }}</p>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <p>Email = {{ customer.email }}</p>
+        </div>
+        <div class="col-lg-6">
+            <p>Address = {{ customer.address.capitalize()  }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <p>Telephone = {{ customer.tel_number }}</p>
+        </div>
+        <div class="col-lg-6">
+            <p>Date of birth = {{ customer.dob }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <p>Total transactions = {{ num_transactions }}</p>
+        </div>
+        <div class="col-lg-6">
+            <p>Number of connections = {{ num_connections }}</p>
+        </div>
+    </div>
+</div>
+    <div class="container" id="user_transactions">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Your upcoming bookings</h4>
+            </div>
+            {% if not upcoming_transactions %}
+            <div class="col-lg-12">
+                <p>It appears you have made not made any upcoming bookings, please contact us <strong>immediately</strong> if this is a mistake</p>
+                <a href="/misc/contact_us">Contact us</a>
+            </div>
+                </div>
+            {% else %}
+                </div>
+                {% for transaction in upcoming_transactions %}
+                    <div class="row newTrans">
+                        <div class="col-lg-12 col-md-6 col-sm-12 bookingCol">
+                            <p class="room_name">Room: {{ transaction[0] }}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <p>Arrival: {{transaction[1]}} </p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <p>ID: {{transaction[3]}}</p>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <p>Departure: {{transaction[2]}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    <div class="container" id="connection_activity">
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Friend activity</h4>
+            </div>
+            {% if not friend_activity %}
+                <div class="col-lg-12">
+                    <p>It appears you have made not made any connections, you can add some by clicking the link below </p>
+                    <a href="add_connection">Add connection</a>
+                </div>
+                </div>
+            {% else %}
+                </div>
+                {% for friends in friend_activity %}
+                    <div class="row newFriend">
+                        <div class="col-lg-12 bookingCol">
+                            <p class="friend_name">Friend: {{ friends[1] }}</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <p>{{friends[0]}} has booked a {{friends[2]}} room from the {{friends[3]}} to the {{friends[4]}}! </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

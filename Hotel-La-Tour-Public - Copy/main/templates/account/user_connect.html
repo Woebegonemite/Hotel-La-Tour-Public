@@ -1,0 +1,98 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/user_connect.css">
+{% endblock %}
+
+{% block title %}
+Add Connections!
+{% endblock %}
+
+{% block main_content %}
+
+    {% if success %}
+     <div id="success"> <!-- Defines the div for displaying cookie information-->
+         {% if success == 1 %}
+            <h2>Request successfully sent to: {{ added_email }}</h2>
+         {% elif success == 2 %}
+            <h2>{{ added_email }} successfully added to friend list</h2>
+             {% elif success == 3 %}
+             <h2>Decline friend invitation from {{ added_email }}</h2>
+             {% elif success == 4 %}
+             <h2>{{ added_email }} was deleted from friends list</h2>
+        {% endif %}
+    </div>
+    {% endif %}
+
+<div class="container">
+    <h1>User connection</h1>
+    <div class="row sec_nav">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <a class="btn-success" href="#addfriend">Add Friend</a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <a class="btn-info" href="#viewpendingconnections">Pending Connections</a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <a class="btn-danger" href="#deletefriend">Delete Friend</a>
+        </div>
+    </div>
+</div>
+    <div class="container" id="addfriend">
+            <h4>Add friend</h4>
+        <form method="post">
+            <div class="form-group">
+                <label for="email" class="form-control">Email:</label>
+                <input type="email" name="email">
+            </div>
+            <input type="submit" name="AddFriend" id="friend_add_submit" class="btn-success">
+             <div id="ErrorDiv" {% if error %} style="visibility: visible" {% endif %}>
+                <h4>{{ error }}</h4>
+            </div>
+        </form>
+    </div>
+    <div class="container" id="viewpendingconnections">
+            <div>
+                <h4>Pending requests</h4>
+            </div>
+            {% for pending_friend in pending_friends %}
+                <form class="Pending_Friends" method="post">
+                    <input name="connected_id" value="{{pending_friend.id}}" type="hidden">
+                    <div class="pendingrequest">
+                        <div class="row pendinginfo">
+                            <div class="col-lg-12">
+                                <p>{{ pending_friend.id }}</p>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <p>{{ pending_friend.first_name }} {{ pending_friend.last_name }} </p>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+                                <p>{{ pending_friend.email }}</p>
+                            </div>
+                        </div>
+                        <div class="row submit_btns">
+                            <div class="col-lg-6 col-xs-12">
+                                <input type="submit" name="AcceptPending" class="btn-success" value="Accept">
+                            </div>
+                            <div class="col-lg-6 col-xs-12">
+                                <input type="submit" name="DeclinePending" class="btn-danger" value="Decline">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% endfor %}
+    </div>
+    <div class="container" id="deletefriend">
+        <h4>Delete Friend</h4>
+        <form method="post">
+            <div class="form-group">
+                <label for="deleted_email" class="form-control">Email:</label>
+                <input type="email" name="deleted_email">
+            </div>
+            <input type="submit" name="DeleteFriend" value="submit">
+        </form>
+    </div>
+{% endblock %}
+
+{% block additional_js %}
+<script src="../../static/js/user_connect.js"></script>
+{% endblock %}

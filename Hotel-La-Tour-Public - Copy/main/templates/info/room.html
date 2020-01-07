@@ -1,0 +1,51 @@
+{% extends "includes/_main_layout.html"%}
+{% block additional_css %}
+<link rel="stylesheet" href="../../static/css/room.css">
+{% endblock %}
+
+{% block title %}
+Accommodation!
+{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <h1>Accommodation:</h1>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <h4>Standard Room</h4>
+            <a href="/info/room/1">
+                <img src="../../static/imgs/GlassMetalGreen.jpg" alt="Standard room image" class=".img-thumbnail .img-responsive">
+            </a>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h4>Executive Room</h4>
+            <a href="/info/room/2">
+                <img src="../../static/imgs/Lighting.jpeg" alt="Executive room image" class=".img-thumbnail .img-responsive">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <h4>Suite One</h4>
+            <a href="/info/room/3">
+                <img src="../../static/imgs/CeilingBoothsSeating.jpg" alt="Suite one room image" class=".img-thumbnail .img-responsive">
+            </a>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h4>Suite Two</h4>
+            <a href="/info/room/4">
+                <img src="../../static/imgs/CellingLight.jpg" alt="Suite two room image" class=".img-thumbnail .img-responsive">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <p id="explain">Choose to view and compare our four available rooms and suites</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block additional_js %}
+
+{% endblock %}

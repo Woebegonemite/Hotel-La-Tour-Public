@@ -1,0 +1,155 @@
+<!-- This html document defines the format that is followed by all the other
+pages, making it the parent page. This defines the head of the document as well
+as the basic body -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Mark Stuart">
+    <meta name="keywords" content="Hotel, Milton Keynes, Bookings, Restaurant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='../favicon.ico' type='image/x-icon'>
+    <title>{%  block title %} {% endblock %}</title> <!-- Lets each page have its own title-->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../static/css/main.css">
+    <link rel="icon" href="../../static" type="image/ico">
+    {% block additional_css %}{% endblock %} <!--Allows extra css to be added-->
+</head>
+<body>
+
+{% if has_cookie == False %}
+    <div id="cookies"> <!-- Defines the div for displaying cookie information-->
+        <h2>We love cookies!</h2>
+        <p>Our website uses cookies; these are vital for storing your account details and making
+        sure that you can use the website as intended. Don't worry- we're not out to get you!
+        Please accept below:</p>
+        <a class="btn-success" id="CookieAccept">Accept!</a>
+    </div>
+    <div id="invisible"></div>
+{% endif %}
+
+{% if nav == True %} <!-- Inspired from: https://mdbootstrap.com/docs/jquery/navigation/navs/-->
+    <nav class="navbar navbar-expand-lg">
+  <a class="navbar-brand" href="/">Hotel La Tour</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" id="bookNow" href="/transaction/booking">Book Now</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/info/accommodation">Accommodation</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/info/restuarant">Restaurant</a>
+      </li>
+      <li class="nav-item" id="galleryNav">
+        <a class="nav-link" href="/info/gallery">Gallery</a>
+      </li>
+        <li class="nav-item" id="contactNav">
+        <a class="nav-link" href="/misc/contact_us">Contact</a>
+        </li>
+        {% if not user_name %}
+            <li class="nav-item" id="login">
+            <a class="nav-link" href="/account/login">Login</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" href="/account/register">Register</a>
+          </li>
+        {% else %}
+            <li class="nav-item" id="accountNameSmall">
+            <a href="/account/your_account" class="nav-link">Welcome {{ user_name }} </a>
+          </li>
+            <li class="nav-item" id="logOutSmall">
+            <a href="/log_out" class="nav-link">Log out</a>
+          </li>
+        {% endif %}
+
+    </ul>
+  </div>
+        {% if user_name %}
+            <div id="accountItemsBig">
+                <div id="accountName" style="right:{{ 7+user_name|length/2 }}em">
+                    <a href="/account/your_account" class="nav-link">Welcome {{ user_name }} </a>
+                </div>
+                <div id="logOut">
+                    <a href="/log_out" class="nav-link">Log out</a>
+                </div>
+            </div>
+        {% endif %}
+</nav>
+
+
+{% endif %}
+
+<div class="main_content"> <!--Defines the main content for the webpages, this is where all
+                                the content is situated-->
+{% block main_content %} {% endblock %}
+</div>
+
+{% if footer == True %} <!-- Inspired from: https://mdbootstrap.com/docs/jquery/navigation/footer/-->
+<footer class="page-footer font-small mdb-color pt-4">
+  <div class="container text-center text-md-left">
+    <div class="row text-center text-md-left mt-3 pb-3">
+      <div class="col-md-5 col-lg-5 col-xl-5 mx-auto mt-3">
+        <h5 class="mb-3">Hotel La Tour</h5>
+        <p>Hotel La Tour is a high quality hotel situated in the heart of Milton Keynes. Your comfort
+            is what drives us and we have trained staff at the ready to assist you with whatever you require.
+            Please contact us with any issues</p>
+      </div>
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="mb-3">Links</h5>
+        <p>
+          <a href="/account/your_account">View Account</a>
+        </p>
+        <p>
+          <a href="/transaction/delete_transaction">Delete a transaction</a>
+        </p>
+        <p>
+          <a href="/misc/policy_info">Policy details</a>
+        </p>
+        <p>
+          <a href="/misc/help">Help</a>
+        </p>
+          <p>
+          <a href="/misc/contact_us">Contact us</a>
+        </p>
+          <p id="galleryFooter">
+          <a href="/misc/contact_us">Gallery</a>
+        </p>
+      </div>
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h5 class="mb-3">Contact Us</h5>
+        <p>6 Saxon Gate, Midsummer Boulevard, Milton Keynes, MK9 3BN</p>
+        <p>info@hotel-latourmiltonkeynes.co.uk</p>
+        <p>01234 567891</p>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-7 col-lg-8">
+        <p class="text-center text-md-left">© 2019 Copyright: Hotel La Tour Ltd </p>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endif %}
+
+<!-- Imports CDNs for scripts that are used by every page, most importantly bootstrap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="../../static/js/main.js">
+
+</script>
+{% block additional_js %} {% endblock %} <!--Lets the user input additional JavaScript -->
+</body>
+</html>
